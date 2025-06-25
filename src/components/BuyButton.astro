@@ -1,0 +1,18 @@
+---
+const MX = 'MX';
+const country = Astro.request.headers.get('accept-language') ?? 'MX'; // new URL(Astro.url).searchParams.get('country');
+
+console.log(country);
+
+const storeCountry = country === MX ? 'mexico' : 'usa';
+const countryName = country === MX ? 'Mexico' : 'USA';
+
+const { buy } = Astro.props;
+
+const buyLink = buy[storeCountry];
+
+---
+
+<a href={buyLink} class="btn bg-gradient-primary" target="_blank" rel="noopener noreferrer">
+    Comprar en {countryName}
+</a>

@@ -1,0 +1,33 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import { Breadcrumb } from 'astro-bootstrap';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+		<link rel="stylesheet" href="/css/soft-ui-dashboard.css" />		
+		<title>Astro Basics</title>
+		<ClientRouter />
+	</head>
+	<body class="bg-gray-100">
+		<Breadcrumb />
+		<div class="container">
+			<slot />
+		</div>
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

@@ -1,0 +1,70 @@
+---
+//import type { GetStaticPaths } from "astro";
+import { getCollection, render, getEntry } from 'astro:content';
+import { SHOW_BUY_BUTTON } from 'astro:env/server';
+import BookScore from '../../components/BookScore.astro';
+import Layout from '../../layouts/Layout.astro';
+import BuyButton from '../../components/BuyButton.astro';
+
+//const { id } = Astro.params;
+
+export const getStaticPaths = async () => {
+    const books = await getCollection('books');
+
+    return books.map(book => ({
+        params: {id: book.id},
+        props: { book }
+    }));
+};
+ 
+const { book } = Astro.props;
+const { title, author, img, readtime, buy } = book.data;
+const { Content } = await render(book);
+
+export const prerender = true;
+---
+
+<Layout title={`${title} - Dev Books`}>
+    <main class="main-content mt-0 ps-0">
+        <div class="container-fluid py-2">
+            <div class="row">
+                <div class="col-4">
+                    <aside class="d-flex justify-content-center">
+                        <img 
+                            transition:name={`${book.id}-image`}
+                            src={'/img/' + img} 
+                            alt={title} 
+                            class="img-fluid h-50 rounded-3" 
+                        />                        
+                    </aside>
+                    <div class="d-flex justify-content-end mt-3">
+                        <BookScore server:defer id={book.id}>
+                            <span slot="fallback" class="badge bg-secondary rounded-pill opacity-75">
+                                ⭐️ Cargando...
+                            </span>
+                        </BookScore>
+                    </div>
+                    {SHOW_BUY_BUTTON && (
+                        <div class="d-flex justify-content-center mt-3 gap-2">
+                            <BuyButton server:defer buy={buy} />
+                        </div>
+                    )}
+                </div>
+                <div class="col-8">
+                    <h3 transition:name={`${book.id}-title`}>
+                        { title }
+                    </h3>
+                    <h6 class="text-muted">{author}</h6>
+                    <main>
+                        <Content />
+                        <p class="text-end">
+                            <small class="text-muted">
+                                { readtime } minutos de lectura
+                            </small>
+                        </p>                        
+                    </main>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>

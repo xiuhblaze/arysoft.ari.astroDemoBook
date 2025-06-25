@@ -1,0 +1,16 @@
+{
+  "name": "dev-books",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.6.0",
+    "astro": "^5.8.1",
+    "astro-bootstrap": "^0.7.2"
+  }
+}
