@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/",
+    "/_astro/*",
+    "/favicon.svg",
+    "/css/soft-ui-dashboard.css",
+    "/css/soft-ui-dashboard.css.map",
+    "/css/soft-ui-dashboard.min.css",
+    "/img/bgTrianglesBW.jpg",
+    "/img/bgWavesBlack.jpg",
+    "/img/bgWavesWhite.jpg",
+    "/libro/*"
+  ]
+}
